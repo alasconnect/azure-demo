@@ -10,8 +10,6 @@ module Database where
 --------------------------------------------------------------------------------
 import Data.Text
 import Database.Beam
-import Database.Beam.Postgres
-import GHC.Generics
 --------------------------------------------------------------------------------
 
 data TodoT f

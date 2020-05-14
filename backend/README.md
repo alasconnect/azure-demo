@@ -1,5 +1,11 @@
 # Todo Haskell Backend API
 
+To create the proper environment invoke the following command:
+
+     nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/20.03.tar.gz
+
+# Comments
+
 This git repository shows a method for laying out a Haskell web application based on how we do things at AlasConnect. We had some core goals in mind, and it took us a few years to get past early bad design decisions and derive this solution.
 
 - Simplicity is king, but use some of the fancier stuff if it makes your life easier (i.e. lens turns out to be a great abstraction for manipulating Haskell records)

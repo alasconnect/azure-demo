@@ -5,7 +5,6 @@ module Routes where
 
 --------------------------------------------------------------------------------
 import Servant
-import Servant.API
 --------------------------------------------------------------------------------
 import Models.Todo
 --------------------------------------------------------------------------------
@@ -41,6 +40,7 @@ type GetTodos =
   TodoListTerm :>
   Get '[JSON] [TodoR]
 
+-- GET /api/v2/todo/{id}
 type GetTodo =
   TodoTerm :>
   Capture "todo_id" TodoId :>

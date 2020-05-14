@@ -1,14 +1,12 @@
 module Api.Todo where
 
 --------------------------------------------------------------------------------
-import Data.Text
 import GHC.Stack
 import Servant
 --------------------------------------------------------------------------------
 import qualified Domain.Todo as DA
 import Errors
 import Models.Todo
-import Routes
 import Runner
 import Types
 --------------------------------------------------------------------------------

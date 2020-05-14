@@ -15,7 +15,7 @@ todoMock =
 
 todoMocks :: [TodoR]
 todoMocks =
-  fmap (const todoMock) [1..]
+  fmap (const todoMock) ([1..] :: [Int])
 
 instance TodoDAM Identity where
   getTodos =

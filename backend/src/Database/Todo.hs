@@ -40,8 +40,9 @@ create tc conn =
                (val_ (fromEnum New))
         ]
     case v of
-      []  -> pure Nothing
-      [a] -> pure (Just a)
+      []    -> pure Nothing
+      [a]   -> pure (Just a)
+      (a:_) -> pure (Just a)
 
 update :: (HasCallStack, MonadIO m) => Todo -> Connection -> m ()
 update tu conn =

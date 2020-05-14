@@ -1,7 +1,6 @@
 module Errors where
 
 --------------------------------------------------------------------------------
-import Control.Monad.Reader
 import Control.Monad.Except
 import Data.Aeson
 import Servant
@@ -14,7 +13,7 @@ handleError :: AppContext -> IO (Either AppError a) -> Handler a
 handleError ctx f = Handler . ExceptT $ convert ctx f
 
 convert :: AppContext -> IO (Either AppError a) -> IO (Either ServerError a)
-convert ctx f = f >>= \case
+convert _ctx f = f >>= \case
   Left e -> do
     -- errorLogger ctx e
     pure . Left $ translate e
