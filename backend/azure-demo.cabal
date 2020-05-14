@@ -34,6 +34,7 @@ library
     , lens
     , mtl
     , optparse-applicative
+    , postgresql-simple
     , resource-pool
     , servant
     , servant-server

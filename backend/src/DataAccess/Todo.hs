@@ -6,7 +6,7 @@ module DataAccess.Todo where
 --------------------------------------------------------------------------------
 import Control.Lens
 import Control.Monad.Reader
-import Data.Pool
+import Database.Beam.Postgres (Connection)
 import GHC.Stack
 --------------------------------------------------------------------------------
 import Database
@@ -28,25 +28,24 @@ class Monad m => TodoDAM m where
   createTodo :: HasCallStack => M.TodoC -> m (Maybe M.TodoR)
   updateTodo :: HasCallStack => M.TodoU -> m (Maybe ())
 
-instance TodoDAM (ReaderT AppContext IO) where
+instance TodoDAM (ReaderT (AppContext, Connection) IO) where
   getTodos = do
-    p <- asks appContextPool
-    liftIO $ withResource p allTodos >>= pure . fmap toTodoR
+    (_, conn) <- ask
+    liftIO $ allTodos conn >>= pure . fmap toTodoR
 
   getTodo tid = do
-    p <- asks appContextPool
-    liftIO $ withResource p (todoById tid) >>= pure . fmap toTodoR
+    (_, conn) <- ask
+    liftIO $ todoById tid conn >>= pure . fmap toTodoR
 
   createTodo tdc = do
-    p <- asks appContextPool
-    liftIO $ withResource p (create tdc) >>= pure . fmap toTodoR
+    (_, conn) <- ask
+    liftIO $ create tdc conn >>= pure . fmap toTodoR
 
   updateTodo tdu = do
-    p <- asks appContextPool
-    liftIO $ withResource p $ \conn ->
-      todoById (view M.todoId tdu) conn >>= \case
-        Nothing -> pure Nothing
-        Just v  -> update (tu v) conn >> pure (Just ())
+    (_, conn) <- ask
+    liftIO $ todoById (view M.todoId tdu) conn >>= \case
+      Nothing -> pure Nothing
+      Just v  -> update (tu v) conn >> pure (Just ())
     where
       tu v = Todo (M.unTodoId (view M.todoId tdu))
                   (maybe (todoName v) M.unTodoName (view M.name tdu))
