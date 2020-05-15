@@ -31,12 +31,11 @@ type RoutesTodo =
   :<|> GetTodo
   :<|> CreateTodo
   :<|> UpdateTodo
-{-
   :<|> GetUsers
   :<|> GetUser
   :<|> CreateUser
   :<|> UpdateUser
--}
+  
 --------------------------------------------------------------------------------
 
 type TodoListTerm = "todos"

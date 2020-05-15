@@ -23,8 +23,8 @@ apiTodo ctx =
   :<|> getTodo ctx
   :<|> createTodo ctx
   :<|> updateTodo ctx
-{-  :<|> getUsers ctx
+  :<|> getUsers ctx
   :<|> getUser ctx
   :<|> createUser ctx
   :<|> updateUser ctx
--}
+  
