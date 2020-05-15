@@ -22,6 +22,13 @@ toTodoR t =
           (M.TodoDesc $ todoDesc t)
           (toEnum $ todoStatus t)
 
+-- While not "lawful" typeclasses, we take advantage of the abstraction
+-- so that we can write an intermediate layer between our Domain and
+-- actual datasource (in this particular case a Database layer).
+--
+-- This then allows us to test the Domain logic using the same typeclass
+-- but in some alternative Monad, like Identity or State.
+
 class Monad m => TodoDAM m where
   getTodos :: HasCallStack => m [M.TodoR]
   getTodo :: HasCallStack => M.TodoId -> m (Maybe M.TodoR)

@@ -9,6 +9,9 @@ import Servant
 import Types
 --------------------------------------------------------------------------------
 
+-- Our top level handler captures any errors that get generated and properly
+-- converts them into an ErrorJSON, logs somewhere, and returns the right
+-- HTTP error code.
 handleError :: AppContext -> IO (Either AppError a) -> Handler a
 handleError ctx f = Handler . ExceptT $ convert ctx f
 
