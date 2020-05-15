@@ -4,6 +4,7 @@ module Api where
 import Servant
 --------------------------------------------------------------------------------
 import Api.Todo
+import Api.User
 import Routes
 import Types
 --------------------------------------------------------------------------------
@@ -22,3 +23,8 @@ apiTodo ctx =
   :<|> getTodo ctx
   :<|> createTodo ctx
   :<|> updateTodo ctx
+{-  :<|> getUsers ctx
+  :<|> getUser ctx
+  :<|> createUser ctx
+  :<|> updateUser ctx
+-}

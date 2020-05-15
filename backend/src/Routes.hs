@@ -7,6 +7,7 @@ module Routes where
 import Servant
 --------------------------------------------------------------------------------
 import Models.Todo
+import Models.User
 --------------------------------------------------------------------------------
 
 -- In order to get proper route type safety and avoid spelling mistakes like
@@ -30,7 +31,12 @@ type RoutesTodo =
   :<|> GetTodo
   :<|> CreateTodo
   :<|> UpdateTodo
-
+{-
+  :<|> GetUsers
+  :<|> GetUser
+  :<|> CreateUser
+  :<|> UpdateUser
+-}
 --------------------------------------------------------------------------------
 
 type TodoListTerm = "todos"
@@ -54,4 +60,28 @@ type CreateTodo =
 type UpdateTodo =
   TodoTerm :>
   ReqBody '[JSON] TodoU :>
+  PutNoContent
+
+-------------------------------------------------------------------------------
+
+type UserListTerm = "users"
+type UserTerm     = "user"
+
+type GetUsers =
+  UserListTerm :>
+  Get '[JSON] [UserR]
+
+type GetUser =
+  UserTerm :>
+  Capture "user_id" UserId :>
+  Get '[JSON] UserR
+
+type CreateUser =
+  UserTerm :>
+  ReqBody '[JSON] UserC :>
+  Post '[JSON] UserR
+
+type UpdateUser =
+  UserTerm :>
+  ReqBody '[JSON] UserU :>
   PutNoContent

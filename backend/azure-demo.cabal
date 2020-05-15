@@ -20,10 +20,15 @@ library
     , Types
   exposed-modules:
       Api.Todo
+    , Api.User
     , Domain.Todo
+    , Domain.User
     , DataAccess.Todo
+    , DataAccess.User
     , Database.Todo
+    , Database.User
     , Models.Todo
+    , Models.User
   build-depends:
       base
     , aeson
