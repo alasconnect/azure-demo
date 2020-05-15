@@ -47,6 +47,6 @@ instance UserDAM (ReaderT (AppContext, Connection) IO) where
          Just v  -> update (usr v) conn >> pure (Just ())
       where
          usr v = User (M.unUserId (view M.userId uu))
-                     (maybe (M.userName v) M.unUserName (view M.userName uu))
+                     (maybe (userUserName v) M.unUserName (view M.userName uu))
                      (maybe (userFullName v) M.unUserFullName (view M.userFullName uu))
                      (maybe (userPassword v) M.unUserPassword (view M.userPassword uu))

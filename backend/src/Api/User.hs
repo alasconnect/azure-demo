@@ -21,9 +21,10 @@ getUsers ctx =
 getUser
    :: HasCallStack
    => AppContext
+   -> UserId
    -> Handler UserR
 getUser ctx uid =
-   handleError ctx (runApp ctx (DA.getuser uid))
+   handleError ctx (runApp ctx (DA.getUser uid))
 
 createUser
    :: HasCallStack

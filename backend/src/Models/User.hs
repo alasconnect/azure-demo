@@ -77,9 +77,9 @@ makeFields ''UserC
 data UserU
    = UserU
    { userUUserId       :: UserId
-   , userUUserName     :: UserName
-   , userUUserFullName :: UserFullName
-   , userUUserPassword :: UserPassword
+   , userUUserName     :: Maybe UserName
+   , userUUserFullName :: Maybe UserFullName
+   , userUUserPassword :: Maybe UserPassword
    }
    deriving (Generic)
    deriving (FromJSON, ToJSON)

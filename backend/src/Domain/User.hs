@@ -11,7 +11,7 @@ getUsers
    :: ( HasCallStack
       , DA.UserDAM m
       )
-   => m (EitherAppError [UserR])
+   => m (Either AppError [UserR])
 getUsers =
    Right <$> DA.getUsers
 
@@ -19,7 +19,8 @@ getUser
    :: ( HasCallStack
       , DA.UserDAM m
       )
-   => m (Either AppError UserR)
+   => UserId
+   -> m (Either AppError UserR)
 getUser uid =
    DA.getUser uid >>= \case
       Nothing -> pure (Left (ErrorQuery callStack DoesNotExist))
@@ -29,7 +30,8 @@ createUser
    :: ( HasCallStack
       , DA.UserDAM m
       )
-   => m (Either AppError UserR)
+   => UserC
+   -> m (Either AppError UserR)
 createUser uc =
    DA.createUser uc >>= \case
       Nothing -> pure (Left (ErrorGeneral callStack ServerError))
