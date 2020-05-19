@@ -47,3 +47,11 @@ updateUser uu =
    DA.updateUser uu >>= \case
       Nothing -> pure (Left (ErrorQuery callStack DoesNotExist))
       Just _  -> pure (Right ())
+
+{- TODO: Finish verification of passwords, ensure they match -}
+validateUserPassword
+   :: ( HasCallStack )
+   => Maybe UserPassword -> Maybe UserPassword -> Bool
+validateUserPassword (Just _) (Just _)  = True
+-- if upwd == vpwd then True
+validateUserPassword _ _                = False

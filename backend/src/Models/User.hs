@@ -65,9 +65,10 @@ makeFields ''UserR
 
 data UserC
    = UserC
-   { userCUserName     :: UserName
-   , userCUserFullName :: UserFullName
-   , userCUserPassword :: UserPassword
+   { userCUserName           :: UserName
+   , userCUserFullName       :: UserFullName
+   , userCUserPassword       :: UserPassword
+   , userCUserVerifyPassword :: UserPassword
    }
    deriving (Generic)
    deriving (FromJSON, ToJSON)
@@ -76,10 +77,11 @@ makeFields ''UserC
 
 data UserU
    = UserU
-   { userUUserId       :: UserId
-   , userUUserName     :: Maybe UserName
-   , userUUserFullName :: Maybe UserFullName
-   , userUUserPassword :: Maybe UserPassword
+   { userUUserId             :: UserId
+   , userUUserName           :: Maybe UserName
+   , userUUserFullName       :: Maybe UserFullName
+   , userUUserPassword       :: Maybe UserPassword
+   , userUUserVerifyPassword :: Maybe UserPassword
    }
    deriving (Generic)
    deriving (FromJSON, ToJSON)
