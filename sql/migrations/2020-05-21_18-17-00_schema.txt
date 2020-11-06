@@ -1,0 +1,21 @@
+Description:  Initial schema for ToDo app
+Created: 2020-05-21 18:17:00 UTC
+Depends:
+Apply: |
+create table "todo"
+( id        SERIAL primary key
+, name		text not null
+, desc      text
+, status    int not null
+);
+
+create table "user"
+( id        SERIAL primary key
+, username  text not null
+, fullname  text not null
+, password  text not null
+)
+
+Revert: |
+	drop table "todo";
+	drop table "user";
