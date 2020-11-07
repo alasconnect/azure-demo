@@ -15,20 +15,22 @@ import Data.Text
 import Data.Text.Read (decimal)
 import Deriving.Aeson.Stock
 import Servant.API
+
+import Data.Int (Int32)
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
 -- Primitives
 --------------------------------------------------------------------------------
 
-newtype UserId = UserId { unUserId :: Int }
+newtype UserId = UserId { unUserId :: Int32 }
    deriving (Eq, Show, Generic)
    deriving (FromJSON, ToJSON)
    via Vanilla UserId
 instance FromHttpApiData UserId where
    parseUrlPiece t =
       case decimal t of
-         Right (v, _) -> Right . UserId . fromInteger $ v
+         Right (v, _) -> Right . UserId . fromIntegral $ v
          Left e       -> Left . pack $ e
 
 newtype UserName = UserName { unUserName :: Text }

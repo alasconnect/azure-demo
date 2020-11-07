@@ -37,7 +37,7 @@ create tc conn =
         [ Todo default_
                (val_ (unTodoName $ view name tc))
                (val_ (unTodoDesc $ view desc tc))
-               (val_ (fromEnum New))
+               (val_ (fromIntegral . fromEnum $ New))
         ]
     case v of
       []    -> pure Nothing

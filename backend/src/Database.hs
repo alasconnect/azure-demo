@@ -10,14 +10,15 @@ module Database where
 --------------------------------------------------------------------------------
 import Data.Text
 import Database.Beam
+import Data.Int (Int32)
 --------------------------------------------------------------------------------
 
 data TodoT f
   = Todo
-  { todoId     :: Columnar f Int
+  { todoId     :: Columnar f Int32
   , todoName   :: Columnar f Text
   , todoDesc   :: Columnar f Text
-  , todoStatus :: Columnar f Int
+  , todoStatus :: Columnar f Int32
   } deriving (Generic, Beamable)
 
 type Todo = TodoT Identity
@@ -26,7 +27,7 @@ deriving instance Eq Todo
 
 instance Table TodoT where
   data PrimaryKey TodoT f
-    = TodoKey (Columnar f Int)
+    = TodoKey (Columnar f Int32)
     deriving (Generic, Beamable)
   primaryKey = TodoKey <$> todoId
 
@@ -37,7 +38,7 @@ deriving instance Eq TodoKey
 
 data UserT f
   = User
-  { userId           :: Columnar f Int
+  { userId           :: Columnar f Int32
   , userUserName     :: Columnar f Text
   , userFullName     :: Columnar f Text
   , userPassword     :: Columnar f Text
@@ -49,7 +50,7 @@ deriving instance Eq User
 
 instance Table UserT where
     data PrimaryKey UserT f
-      = UserKey (Columnar f Int)
+      = UserKey (Columnar f Int32)
       deriving (Generic, Beamable)
     primaryKey = UserKey <$> userId
 

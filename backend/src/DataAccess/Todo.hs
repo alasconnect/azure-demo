@@ -20,7 +20,7 @@ toTodoR t =
   M.TodoR (M.TodoId $ todoId t)
           (M.TodoName $ todoName t)
           (M.TodoDesc $ todoDesc t)
-          (toEnum $ todoStatus t)
+          (toEnum . fromIntegral $ todoStatus t)
 
 class Monad m => TodoDAM m where
   getTodos :: HasCallStack => m [M.TodoR]
@@ -50,4 +50,4 @@ instance TodoDAM (ReaderT (AppContext, Connection) IO) where
       tu v = Todo (M.unTodoId (view M.todoId tdu))
                   (maybe (todoName v) M.unTodoName (view M.name tdu))
                   (maybe (todoDesc v) M.unTodoDesc (view M.desc tdu))
-                  (maybe (todoStatus v) fromEnum (view M.status tdu))
+                  (maybe (todoStatus v) (fromIntegral . fromEnum) (view M.status tdu))

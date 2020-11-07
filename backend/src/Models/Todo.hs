@@ -7,7 +7,7 @@
 {-# LANGUAGE TemplateHaskell #-}
 
 module Models.Todo where
-  
+
 --------------------------------------------------------------------------------
 import Control.Lens
 import Data.Aeson
@@ -15,6 +15,9 @@ import Data.Text
 import Data.Text.Read (decimal)
 import Deriving.Aeson.Stock
 import Servant.API
+
+import Data.Int (Int32)
+
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
@@ -24,7 +27,7 @@ import Servant.API
 -- An alternative is the `tagged` library.
 --------------------------------------------------------------------------------
 
-newtype TodoId = TodoId { unTodoId :: Int }
+newtype TodoId = TodoId { unTodoId :: Int32 }
   deriving (Eq, Show, Generic)
   deriving (FromJSON, ToJSON)
   via Vanilla TodoId
@@ -32,7 +35,7 @@ newtype TodoId = TodoId { unTodoId :: Int }
 instance FromHttpApiData TodoId where
   parseUrlPiece t =
     case decimal t of
-      Right (v, _) -> Right . TodoId . fromInteger $ v
+      Right (v, _) -> Right . TodoId . fromIntegral $ v
       Left e       -> Left . pack $ e
 
 newtype TodoName = TodoName { unTodoName :: Text }
